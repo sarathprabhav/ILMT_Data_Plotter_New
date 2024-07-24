@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#plot-form {
+    margin: 20px 0;
+}
+
+.checkboxes label {
+    margin-right: 10px;
+}
+
+.dropdown {
+    margin: 20px 0;
+}

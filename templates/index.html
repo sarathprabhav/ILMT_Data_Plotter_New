@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonometric Function Plotter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Trigonometric Function Plotter</h1>
+        <form id="plot-form">
+            
+            <div class="date-input">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+            </div>
+
+            <div class="checkboxes">
+                <label><input type="checkbox" name="function" value="sin"> sin</label>
+                <label><input type="checkbox" name="function" value="cos"> cos</label>
+                <label><input type="checkbox" name="function" value="tan"> tan</label>
+            </div>
+            <div class="dropdown">
+                <label for="x-range">X-Axis Range:</label>
+                <select id="x-range" name="x-range">
+                    <option value="90">0 to 90</option>
+                    <option value="360">0 to 360</option>
+                </select>
+            </div>
+            <button type="submit">Plot</button>
+        </form>
+        <div id="plot"></div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
