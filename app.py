@@ -12,8 +12,8 @@ def plot():
     data = request.json
     functions = data['functions']
     x_range = data['x_range']
-    date = data['fdate']  # Get the date input
-    print("date is : ",date)
+    fdate = data['fdate']  # Get the date input
+    print("date is : ",fdate)
     x_values = np.linspace(0, x_range, 1000)
     y_values = {}
     
