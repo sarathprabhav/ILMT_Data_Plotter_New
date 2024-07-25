@@ -54,47 +54,42 @@ def plot():
     print("From date is : ",fdate)
     print("To date is : ",tdate)
     print("Disc date is : ",disc_date)
-    print("funcction is : ",functions)
+    print("function is : ",functions)
     
     
     # Connect to the database and accuring the data
     conn = get_db_connection()
     cur = conn.cursor()
-    
-    query = f"SELECT date_obs,utstart,fwhm FROM test_table2 WHERE date_obs = %s"
+    params = ','.join(functions)
+    query = f"SELECT date_obs,utstart,{params} FROM test_table2 WHERE date_obs = %s"
+    print(query)
     cur.execute(query,(fdate,))
     result = cur.fetchall()
     cur.close()
     conn.close()
-    print("Testing 2 ",result)
+    #print("Testing 2 ",result)
     
     if result:
         
         #cleaningup and conversions accured data to pandas dataframe
-        df = pd.DataFrame(result, columns=['date','utstart','fwhm'])
+        cols = ['date','utstart']+functions
+        df = pd.DataFrame(result, columns=cols)
         df.sort_values(by = 'utstart', inplace=True)
         df.reset_index(inplace=True, drop=True)
     
     print(df.head())
-    """query = f"SELECT date_obs,utstart, {parameter} FROM test_table2 WHERE date_obs = %s"
-    print(query)
-    cur.execute(query, (date,))
-    result = cur.fetchall()
-    cur.close()
-    conn.close()
 
-    if result:
-        
-        #cleaningup and conversions accured data to pandas dataframe
-        df = pd.DataFrame(result, columns=['date','utstart', parameter])
-        df.sort_values(by = 'utstart',inplace=True)
-        df.reset_index(inplace=True, drop=True) """
     
     
     
     
-    x_values = np.linspace(0, x_range, 1000)
-    y_values = {}
+    #x_values = np.linspace(0, x_range, 1000)
+    #y_values = {}
+    
+    x_values = df['utstart'].apply(time_to_hours)
+    y_values ={}
+
+    y_values['raerr'] = df['raerr'].tolist()
     
     if 'sin' in functions:
         y_values['sin'] = np.sin(np.radians(x_values)).tolist()
