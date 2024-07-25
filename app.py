@@ -89,7 +89,12 @@ def plot():
     x_values = df['utstart'].apply(time_to_hours)
     y_values ={}
 
-    y_values['raerr'] = df['raerr'].tolist()
+    if 'raerr' in functions:
+        y_values['raerr'] = df['raerr'].tolist()
+    if 'decerr' in functions:
+        y_values['decerr'] = df['decerr'].tolist()
+    if 'fwhm' in functions:
+        y_values['fwhm'] = df['fwhm'].tolist()
     
     if 'sin' in functions:
         y_values['sin'] = np.sin(np.radians(x_values)).tolist()

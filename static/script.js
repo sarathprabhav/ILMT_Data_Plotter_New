@@ -24,7 +24,7 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
     .then(response => response.json())
     .then(data => {
         const traces = [];
-
+        console.log(data);
         for (const [func, yValues] of Object.entries(data.y)) {
             traces.push({
                 x: data.x,
