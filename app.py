@@ -108,16 +108,18 @@ def plot():
             cols = ['date','utstart',x_param]+functions
         df = pd.DataFrame(result, columns=cols)
         df = df.sort_values(by=['date', 'utstart'])
-        #df.sort_values(by = 'utstart', inplace=True)
         df.reset_index(inplace=True, drop=True)
-#        pd['datetime'] = datetime.combine(df['date'], df['utstart'])
         df['datetime'] = df.apply(lambda row: datetime.combine(row['date'], row['utstart']), axis=1)
-        print(df['datetime'].tolist())
+    
     # accessing x values from dataframe
     if x_param == 'utstart':
-        x_values = df['utstart'].apply(time_to_hours)
+        #x_values = df['utstart'].apply(time_to_hours)
+        # Creating Jsonifyable x values from datetime values
+        x_values = df['datetime'].tolist()
+        x_values = [str(i) for i in x_values]
+        x_values = [i[0:i.index(".")] for i in x_values]
     elif x_param == 'param2':
-        x_values = df['param2']
+        x_values = df['param2'].values.tolist()
 
     y_values ={}
     
@@ -129,18 +131,12 @@ def plot():
         y_values['decerr'] = df['decerr'].tolist()
     if 'fwhm' in functions:
         y_values['fwhm'] = df['fwhm'].tolist()
-    print( )
-    x_values = df['datetime'].tolist()
-    x_values = [str(i) for i in x_values]
-    x_values = [i[0:i.index(".")] for i in x_values]
-    print(type(x_values[0]))
+    
     print(x_values)
     return jsonify({'x':x_values , 'y': y_values, 'xlabel':param_names_dict[x_param] })
-
-#    return jsonify({'x': df['datetime'].tolist(), 'y': y_values, 'xlabel':param_names_dict[x_param] })
-    #return jsonify({'x': x_values.tolist(), 'y': y_values, 'xlabel':param_names_dict[x_param] })
-# send tick vals as float and tick labels as string. This way it may work. 
-# Also learn to work with plotly.js 
-# See you 
+ 
 if __name__ == '__main__':
     app.run(debug=True)
+# when choosing x axis other that time. The plot shows inconsistent results.
+# This is because x axis will be plotted with sorted values of parameter. 
+# Since we are using multiple variable to plot its not possible to show the Y axis units 
