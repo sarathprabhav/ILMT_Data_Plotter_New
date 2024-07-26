@@ -8,7 +8,7 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
     const fdate = document.getElementById('fdate').value; // For date inputs
     const tdate = document.getElementById('todate').value;
     const ddate = document.getElementById('ddates').value;
-    alert("I am an alert box!");
+    //alert("I am an alert box!");
     fetch('/plot', {
         method: 'POST',
         headers: {
@@ -31,19 +31,34 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
         //console.log(data.y);
         //console.log("================================")
         //console.log(data.x);
-        console.log("================================")
-        console.log(data.test);
-
-        
+        //console.log("================================")
+        //console.log(data.xlabel);
+        console.log("-------------------------------- ")
+        console.log(data);
         for (const [func, yValues] of Object.entries(data.y)) {
             traces.push({
                 x: data.x,
                 y: yValues,
-                mode: 'lines',
+                //mode: 'line',
+                mode:'lines+markers',
+                //type:"scatter",
                 name: func
             });
+        console.log(traces);
         }
-
-        Plotly.newPlot('plot', traces);
+        // Define Layout
+        const layout = {
+            title: "ILMT",
+            xaxis: {
+                automargin: true,
+                tickangle: 40,
+                title: {
+                    text: data.xlabel,
+                    standoff: 20
+                }
+            }
+        };
+        
+        Plotly.newPlot('plot', traces, layout);
     });
 });

@@ -67,7 +67,9 @@ def plot():
     functions = data['functions']
     x_param = data['x_range']
     fdate = data['fdate']  # Get the from date input
+    fdate = '2023-01-31'
     tdate = data['tdate'] # Get the to date input
+    tdate = '2023-12-01'
     disc_date = data['ddate'] # Get the discreet date input
     print("Disc date is : ",disc_date)
     
@@ -90,7 +92,7 @@ def plot():
     query = f"SELECT date_obs,{params} FROM test_table2 WHERE date_obs in ({date_string})"
 
     print("================================================")
-    print(query)
+    #print(query)
     cur.execute(query,(fdate,))
     result = cur.fetchall()
     cur.close()
@@ -105,11 +107,12 @@ def plot():
         else:
             cols = ['date','utstart',x_param]+functions
         df = pd.DataFrame(result, columns=cols)
-        df.sort_values(by = 'utstart', inplace=True)
+        df = df.sort_values(by=['date', 'utstart'])
+        #df.sort_values(by = 'utstart', inplace=True)
         df.reset_index(inplace=True, drop=True)
-        print(df.head())
-
-
+#        pd['datetime'] = datetime.combine(df['date'], df['utstart'])
+        df['datetime'] = df.apply(lambda row: datetime.combine(row['date'], row['utstart']), axis=1)
+        print(df['datetime'].tolist())
     # accessing x values from dataframe
     if x_param == 'utstart':
         x_values = df['utstart'].apply(time_to_hours)
@@ -118,6 +121,7 @@ def plot():
 
     y_values ={}
     
+    param_names_dict = {'utstart':"UT-Start",'param2':"CCD-Temperature" }
 
     if 'raerr' in functions:
         y_values['raerr'] = df['raerr'].tolist()
@@ -125,8 +129,16 @@ def plot():
         y_values['decerr'] = df['decerr'].tolist()
     if 'fwhm' in functions:
         y_values['fwhm'] = df['fwhm'].tolist()
-    
-    return jsonify({'x': x_values.tolist(), 'y': y_values, 'test':"Testing" })
+    print( )
+    x_values = df['datetime'].tolist()
+    x_values = [str(i) for i in x_values]
+    x_values = [i[0:i.index(".")] for i in x_values]
+    print(type(x_values[0]))
+    print(x_values)
+    return jsonify({'x':x_values , 'y': y_values, 'xlabel':param_names_dict[x_param] })
+
+#    return jsonify({'x': df['datetime'].tolist(), 'y': y_values, 'xlabel':param_names_dict[x_param] })
+    #return jsonify({'x': x_values.tolist(), 'y': y_values, 'xlabel':param_names_dict[x_param] })
 # send tick vals as float and tick labels as string. This way it may work. 
 # Also learn to work with plotly.js 
 # See you 
