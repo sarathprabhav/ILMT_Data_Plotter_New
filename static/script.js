@@ -1,3 +1,20 @@
+function deselectAll() {
+    // Get all checkboxes
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    // Loop through the checkboxes and uncheck them
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = false;
+    });
+}
+
+function isEmpty(p1) {
+    if (p1.length > 0) {
+        return false;
+    }
+    else if (p1.length === 0) {
+        return true;
+}
+}
 
 
 document.getElementById('plot-form').addEventListener('submit', function(event) {
@@ -10,19 +27,43 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
     const fdate = document.getElementById('fdate').value; // For date inputs
     const tdate = document.getElementById('todate').value;
     const ddate = document.getElementById('ddates').value;
-    //alert("I am an alert box!");
+    console.log("================================================ ")
+    console.log(" length of fdate: " + fdate.length)
+    console.log(" length of tdate: " + tdate.length)
+    console.log(" length of ddate: " + ddate.length)
+    console.log(((isEmpty(fdate) && isEmpty(tdate) ) || (isEmpty(ddate)) ).valueOf())
+
+
+    if ( (isEmpty(ddate)) ) {
+        
+        if (isEmpty(fdate) || isEmpty(tdate)) {
+            alert('Please select either a date range or a discreet date.');
+            return;
+        }
+
+    }
+
+    if (isEmpty(selectedFunctions)) {
+        alert('Please select at least one parameter.');
+        return;
+    }
+
+
+
     fetch('/plot', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
+        
         body: JSON.stringify({
             functions: selectedFunctions,
             x_range: xRange,
             fdate: fdate,  // Include the date in the POST request payload
             tdate: tdate,  // Include the  to date in the POST request payload
             ddate: ddate  // Include the discreet date in the POST request payload
-        })
+        }    
+    )
     })
     .then(response => response.json())
     .then(data => {
@@ -37,6 +78,10 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
         //console.log(data.xlabel);
         console.log("-------------------------------- ")
         console.log(data);
+
+
+        
+
         for (const [func, yValues] of Object.entries(data.y)) {
             traces.push({
                 x: data.x,
@@ -67,11 +112,4 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
     });
 });
 
-function deselectAll() {
-    // Get all checkboxes
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    // Loop through the checkboxes and uncheck them
-    checkboxes.forEach(function(checkbox) {
-        checkbox.checked = false;
-    });
-}
+

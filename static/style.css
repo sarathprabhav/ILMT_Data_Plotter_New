@@ -55,3 +55,9 @@ body {
     margin-top: 30px;
 }
 
+input,.date-input,#x-axis{
+    font-size: 20px;
+}
+#plot-Button {
+    font-size: 20px;
+}
