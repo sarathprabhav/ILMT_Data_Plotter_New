@@ -1,3 +1,5 @@
+
+
 document.getElementById('plot-form').addEventListener('submit', function(event) {
     event.preventDefault();
     
@@ -64,3 +66,12 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
         Plotly.newPlot('plot', traces, layout);
     });
 });
+
+function deselectAll() {
+    // Get all checkboxes
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    // Loop through the checkboxes and uncheck them
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = false;
+    });
+}

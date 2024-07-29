@@ -13,7 +13,7 @@
         <form id="plot-form">
             
             <div class="date-input">
-                <label for="fdate">From:</label>
+                <label  for="fdate">From:</label>
                 <input type="date" id="fdate" name="fdate">
 
                 <label for="tdate">To:</label>
@@ -22,7 +22,7 @@
                 <div class="discrete-date">
                     <label for="discdate">Discreet Dates:</label>
                     <input type="text" id="ddates" name="discdate"></br>
-                    <font size = "1" color ="red"> *Dates should be given in the yyyy/mm/dd format. Seperated by comma.</font>
+                    <font size = "1" color ="red"> *Dates should be given in the yyyy/mm/dd format.Multiple dates should be seperated by comma.! Do not end in comma</font>
                 </div>
 
 
@@ -61,7 +61,7 @@
                     <label title = "Estimated magnitude zero point error" ><input type="checkbox" name="function" value="zperr">ZP-err</label>
                     <label title = "Estimated magnitude RMS error, bright stars" ><input type="checkbox" name="function" value="magerr">Mag-Err</label>
                 </div>
-                <div class="checkbox-group">
+                <div class="checkbox-group" id = 'checkbox-group-4'>
                     <label title = "FWHM of star images (arcsec)" ><input type="checkbox" name="function" value="fwhm">FWHM</label>
                     <label title = "sky background before performing sky subtraction" ><input type="checkbox" name="function" value="sky">Sky</label>
                     <label title = "CCD Temperature (C)" ><input type="checkbox" name="function" value="param2">CCD Temperature</label>
@@ -71,9 +71,18 @@
                 </div>
                 
             </div>
-            </div>
+                <div class = select_none>
+                    <button onclick="deselectAll()">Deselect All</button>
+                </div>
+            </div>'
+            
+        
+
+
+
+            <!------------------------------------------X Axis ------------------------------>
             <div class="dropdown">
-                <label for="x-axis">X-Axis :</label>
+                <label for="x-axis"> <h3>X-Axis</h1>   :</label>
                 <select id="x-axis" name="x-axis">
                     <option value="utstart"> UT-start </option>
                     <option value="param2">CCD Temperature</option>

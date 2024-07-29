@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, flash
 import numpy as np
 import psycopg2
 import pandas as pd
@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 
 
 app = Flask(__name__)
+app.secret_key = "secret key"
 
 
 # Database connection parameters
@@ -39,6 +40,14 @@ def generate_date_range(start_date_str, end_date_str):
         current_date += timedelta(days=1)
     quoted_dates = ','.join(f"'{date}'" for date in date_list)
     return quoted_dates
+def date_ip_to_db_string(disc_date):
+    """Converts discreet date input to a database compatible string
+    """
+    disc_date_str = ""
+    for i in disc_date:
+        disc_date_str +=f"'{i}',"
+     
+    return disc_date_str[:-1] # Remove the trailing comma
 
 def time_to_hours(time_obj):
     # To convert RA to hours
@@ -61,7 +70,7 @@ def index():
 
 @app.route('/plot', methods=['POST'])
 def plot():
-    
+
     # Getting Data from the frontend
     data = request.json
     functions = data['functions']
@@ -69,13 +78,14 @@ def plot():
     fdate = data['fdate']  # Get the from date input
     fdate = '2023-01-31'
     tdate = data['tdate'] # Get the to date input
-    tdate = '2023-12-01'
-    disc_date = data['ddate'] # Get the discreet date input
-    print("Disc date is : ",disc_date)
+    tdate = '2023-04-15'
+    disc_date = data['ddate'].split(',')  # Get the discreet date input
+    disc_date_str = date_ip_to_db_string(disc_date)             
+    print("================================================")         
+    print(disc_date_str)
     
     date_string = generate_date_range(fdate,tdate) # Generate the date range as a string
-    
-    
+    print(date_string)
     # Connect to the database and accuring the data
     conn = get_db_connection()
     cur = conn.cursor()
@@ -88,13 +98,23 @@ def plot():
         params = x_param +',' +y_params
     else:
         params = 'utstart,' + x_param + ',' + y_params
-        
-    query = f"SELECT date_obs,{params} FROM test_table2 WHERE date_obs in ({date_string})"
-
+    
+    print("Discreet Date",bool(disc_date_str))
+    print("leng",len(disc_date_str))
+    print("Date Range", bool(date_string))
+    
+    
+    if len(disc_date_str) == 2:
+        query = f"SELECT date_obs,{params} FROM test_table2 WHERE date_obs in ({date_string})"
+           
+    else:
+        query = f"SELECT date_obs,{params} FROM test_table2 WHERE date_obs in ({disc_date_str})"    
+    
+    
     print("================================================")
     #print(query)
-    print(params)
-    cur.execute(query,(fdate,))
+    #print(params)
+    cur.execute(query)
     result = cur.fetchall()
     cur.close()
     conn.close()    
