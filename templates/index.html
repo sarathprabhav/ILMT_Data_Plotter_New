@@ -11,84 +11,88 @@
     <div class="container">
         <h1>ILMT Dashboard</h1>
         <form id="plot-form">
-            
-            <div class="date-input">
-                <label  for="fdate">From:</label>
-                <input type="date" id="fdate" name="fdate">
+            <div class="xdate-container">
 
-                <label for="tdate">To:</label>
-                <input type="date" id="todate" name="tdate">
-
-                <div class="discrete-date">
-                    <label for="discdate">Discreet Dates:</label>
-                    <input type="text" id="ddates" name="discdate"></br>
-                    <font size = "1" color ="red"> *Dates should be given in the yyyy/mm/dd format.Multiple dates should be seperated by comma.! Do not end in comma</font>
-                </div>
-
-
-            </div>
-            
-
-            <div class="checbox-master">
-
-                <h3>Y Parameters</h2>
-
-            <div class="checkboxes">
-                
-                <div class="checkbox-group">
-                    <label title="RA of field centre, J2000(hour)"><input type="checkbox" name="function" value="ra">RA</label>
-                    <label title="DEC of field centre, J2000 (degree)" ><input type="checkbox" name="function" value="dec">DEC</label>
-                    <label title = "Dec of first pixel, J2000 (degree) " ><input type="checkbox" name="function" value="dec1">DEC-1</label>
-                    <label title = "RA of first pixel, J2000 (hour)" "><input type="checkbox" name="function" value="ra1">RA-1</label>
-                    <label title = "Dec of last pixel, J2000 (degree)" "><input type="checkbox" name="function" value="dec2">DEC-2</label>
-                    <label title = "RA of last pixel, J2000 (hour)" "><input type="checkbox" name="function" value="ra2">RA-2</label>
-                    <label title = "Dec of field center at epoch of observation (degree) " "><input type="checkbox" name="function" value="dec_obs">DEC-obs</label>
-                    <label title = "RA of field center at epoch of observation (hour)" "><input type="checkbox" name="function" value="ra_obs">RA-obs</label>
+                <div class="date-input">
                     
+                    <div class="date-input">
+                        <label  for="fdate">From:</label>
+                        <input type="date" id="fdate" name="fdate">
+                        <label for="tdate">To:</label>
+                        <input type="date" id="todate" name="tdate">
+                    </div>
+                    <div class="date-input2" id="discreet-date">
+                        <label for="discdate">Discreet Dates:</label>
+                        <input type="text" id="ddates" name="discdate"></br>
+                        <font size = "1" color ="red"> *Dates should be given in the yyyy/mm/dd format.Multiple dates should be seperated by comma.! Do not end in comma</font>
+                    </div>
                 </div>
-                
-                <div class="checkbox-group">
-                    <label title = "major axis of star images (arcsec)" ><input type="checkbox" name="function" value="psf_a">PSF-A</label>
-                    <label title = "minor axis of star images (arcsec)" ><input type="checkbox" name="function" value="psf_b">PSF B</label>
-                    <label title = "position angle of star images (deg)" ><input type="checkbox" name="function" value="psf_pa">PSF-PA</label>
-                    <label title = "Photometric magnitude zero point" ><input type="checkbox" name="function" value="zeropt">Zero Pt</label>
+                <div class="date-input" id="xaxisid">
+                    <label for="x-axis"> <h3>X-Axis</h1></label>
+                    <select id="x-axis" name="x-axis">
+                        <option value="utstart"> UT-start </option>
+                        <option value="param2">CCD Temperature</option>
+                    </select>
                 </div>
-
-                <div class="checkbox-group">
-                    <label title = "Estimated total error (arcsec)" ><input type="checkbox" name="function" value="poserr">Pos-Err</label>
-                    <label title = "Estimated RA error (arcsec)" ><input type="checkbox" name="function" value="raerr"> RA-Err</label>
-                    <label title = "Estimated dec error (arcsec)" ><input type="checkbox" name="function" value="decerr"> DEC-Err</label>
-                    <label title = "Estimated magnitude zero point error" ><input type="checkbox" name="function" value="zperr">ZP-err</label>
-                    <label title = "Estimated magnitude RMS error, bright stars" ><input type="checkbox" name="function" value="magerr">Mag-Err</label>
-                </div>
-                <div class="checkbox-group" id = 'checkbox-group-4'>
-                    <label title = "FWHM of star images (arcsec)" ><input type="checkbox" name="function" value="fwhm">FWHM</label>
-                    <label title = "sky background before performing sky subtraction" ><input type="checkbox" name="function" value="sky">Sky</label>
-                    <label title = "CCD Temperature (C)" ><input type="checkbox" name="function" value="param2">CCD Temperature</label>
-                    <label title = "CCD Chamber Pressure (Torr)" ><input type="checkbox" name="function" value="param7">CCD Chamber Pressure</label>
-                    <label title = "CryoTiger Pressure 1 (psi)" ><input type="checkbox" name="function" value="param48">CryoTiger Pressure 1</label>
-                    <label title = "CryoTiger Pressure 2 (psi)" ><input type="checkbox" name="function" value="param49">CryoTiger Pressure 2</label>
-                </div>
-                
             </div>
+            <div class="checbox-master">
+                <div class="checkbox-head">
+                <h3>Y Parameters</h3>
+                </div>
+                
                 <div class = select_none>
                     <button onclick="deselectAll()">Deselect All</button>
                 </div>
-            </div>'
+
+                <div class="checkboxes">
+                    
+                    <div class="checkbox-group">
+                        <label title="RA of field centre, J2000(hour)"><input type="checkbox" name="function" value="ra">RA</label>
+                        <label title="DEC of field centre, J2000 (degree)" ><input type="checkbox" name="function" value="dec">DEC</label>
+                        <label title = "Dec of first pixel, J2000 (degree) " ><input type="checkbox" name="function" value="dec1">DEC-1</label>
+                        <label title = "RA of first pixel, J2000 (hour)" "><input type="checkbox" name="function" value="ra1">RA-1</label>
+                        <label title = "Dec of last pixel, J2000 (degree)" "><input type="checkbox" name="function" value="dec2">DEC-2</label>
+                        <label title = "RA of last pixel, J2000 (hour)" "><input type="checkbox" name="function" value="ra2">RA-2</label>
+                        <label title = "Dec of field center at epoch of observation (degree) " "><input type="checkbox" name="function" value="dec_obs">DEC-obs</label>
+                        <label title = "RA of field center at epoch of observation (hour)" "><input type="checkbox" name="function" value="ra_obs">RA-obs</label>
+                        
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <label title = "major axis of star images (arcsec)" ><input type="checkbox" name="function" value="psf_a">PSF-A</label>
+                        <label title = "minor axis of star images (arcsec)" ><input type="checkbox" name="function" value="psf_b">PSF B</label>
+                        <label title = "position angle of star images (deg)" ><input type="checkbox" name="function" value="psf_pa">PSF-PA</label>
+                        <label title = "Photometric magnitude zero point" ><input type="checkbox" name="function" value="zeropt">Zero Pt</label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label title = "Estimated total error (arcsec)" ><input type="checkbox" name="function" value="poserr">Pos-Err</label>
+                        <label title = "Estimated RA error (arcsec)" ><input type="checkbox" name="function" value="raerr"> RA-Err</label>
+                        <label title = "Estimated dec error (arcsec)" ><input type="checkbox" name="function" value="decerr"> DEC-Err</label>
+                        <label title = "Estimated magnitude zero point error" ><input type="checkbox" name="function" value="zperr">ZP-err</label>
+                        <label title = "Estimated magnitude RMS error, bright stars" ><input type="checkbox" name="function" value="magerr">Mag-Err</label>
+                    </div>
+                    <div class="checkbox-group" id = 'checkbox-group-4'>
+                        <label title = "FWHM of star images (arcsec)" ><input type="checkbox" name="function" value="fwhm">FWHM</label>
+                        <label title = "sky background before performing sky subtraction" ><input type="checkbox" name="function" value="sky">Sky</label>
+                        <label title = "CCD Temperature (C)" ><input type="checkbox" name="function" value="param2">CCD Temperature</label>
+                        <label title = "CCD Chamber Pressure (Torr)" ><input type="checkbox" name="function" value="param7">CCD Chamber Pressure</label>
+                        <label title = "CryoTiger Pressure 1 (psi)" ><input type="checkbox" name="function" value="param48">CryoTiger Pressure 1</label>
+                        <label title = "CryoTiger Pressure 2 (psi)" ><input type="checkbox" name="function" value="param49">CryoTiger Pressure 2</label>
+                    </div>
+                    
+                </div>
+                <button id="plot-Button" type="submit">Plot</button>
+                
+            </div>
             
         
 
 
 
             <!------------------------------------------X Axis ------------------------------>
-            <div class="dropdown">
-                <label for="x-axis"> <h3>X-Axis</h1></label>
-                <select id="x-axis" name="x-axis">
-                    <option value="utstart"> UT-start </option>
-                    <option value="param2">CCD Temperature</option>
-                </select>
-            </div>
-            <button id="plot-Button" type="submit">Plot</button>
+            
+            
         </form>
         <div id="plot"></div>
     </div>
