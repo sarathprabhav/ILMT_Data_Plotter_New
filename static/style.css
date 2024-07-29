@@ -25,3 +25,25 @@ body {
 .discrete-date{
     margin-top: 10px;
 }
+
+.checkboxes{
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    margin-bottom: 20px;
+    border: 1px solid #000;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    width: 1000px auto;
+}
+.checkbox-group {
+    
+    padding: 1px;
+    width: 300px;
+    margin: 20px auto;
+    
+}
+
+.checkbox-group label {
+    display: block;
+    margin-bottom:10px;
+}

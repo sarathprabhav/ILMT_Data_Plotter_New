@@ -93,6 +93,7 @@ def plot():
 
     print("================================================")
     #print(query)
+    print(params)
     cur.execute(query,(fdate,))
     result = cur.fetchall()
     cur.close()
@@ -121,17 +122,68 @@ def plot():
     elif x_param == 'param2':
         x_values = df['param2'].values.tolist()
 
-    y_values ={}
+    
     
     param_names_dict = {'utstart':"UT-Start",'param2':"CCD-Temperature" }
-
+    y_values ={}
+    
+    y_list = ["utstart,ra,dec,ra1,dec1,ra2,dec2,dec_obs,ra_obs,psf_a,psf_b,psf_pa,zeropt,poserr,raerr,decerr,zperr,magerr,fwhm,sky,param2,param7,param48,param49"]
+    
+    #==============================GROUP 1============================
+    if 'ra'in functions:
+        y_values['ra'] = df["ra"].apply(time_to_hours).tolist()
+    if 'dec'in functions:
+        y_values['dec'] = df['dec'].apply(dec_to_degree).tolist()
+    if 'ra1' in functions:
+        y_values['ra1'] = df['ra1'].apply(time_to_hours).tolist()
+    if 'dec1' in functions:
+        y_values['dec1'] = df['dec1'].apply(dec_to_degree).tolist()
+    if 'ra2' in functions:
+        y_values['ra2'] = df['ra2'].apply(time_to_hours).tolist()
+    if 'dec2' in functions:
+        y_values['dec2'] = df['dec2'].apply(dec_to_degree).tolist()
+    if 'dec_obs' in functions:
+        y_values['dec_obs'] = df['dec_obs'].apply(dec_to_degree).tolist()
+    if 'ra_obs' in functions:
+        y_values['ra_obs'] = df['ra_obs'].apply(time_to_hours).tolist()
+    
+    #==============================Group 2 ============================
+    if 'psf_a' in functions:
+        y_values['psf_a'] = df['psf_a'].tolist()
+    if 'psf_b' in functions:
+        y_values['psf_b'] = df['psf_b'].tolist()
+    if 'psf_pa' in functions:
+        y_values['psf_pa'] = df['psf_pa'].tolist()
+    if 'zeropt' in functions:
+        y_values['zeropt'] = df['zeropt'].tolist()
+        
+    #=============================Group 3 =============================
+    if 'poserr' in functions:
+        y_values['poserr'] = df['poserr'].tolist()
     if 'raerr' in functions:
         y_values['raerr'] = df['raerr'].tolist()
     if 'decerr' in functions:
-        y_values['decerr'] = df['decerr'].tolist()
+        y_values['decerr'] = df['decerr'].tolist
+    if 'zperr' in functions:
+        y_values['zperr'] = df['zperr'].tolist()
+    if 'magerr' in functions:
+        y_values['magerr'] = df['magerr'].tolist()
+    
+    #============================Group 4 =============================
     if 'fwhm' in functions:
         y_values['fwhm'] = df['fwhm'].tolist()
+    if'sky' in functions:
+        y_values['sky'] = df['sky'].tolist()
+    if 'param2' in functions:
+        y_values['param2'] = df['param2'].tolist()
+    if 'param7' in functions:
+        y_values['param7'] = df['param7'].tolist()
+    if 'param48' in functions:
+        y_values['param48'] = df['param48'].tolist()
+    if 'param49' in functions:
+        y_values['param49'] = df['param49'].tolist()
     
+     
     print(x_values)
     return jsonify({'x':x_values , 'y': y_values, 'xlabel':param_names_dict[x_param] })
  
