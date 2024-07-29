@@ -82,10 +82,9 @@ def plot():
     disc_date = data['ddate'].split(',')  # Get the discreet date input
     disc_date_str = date_ip_to_db_string(disc_date)             
     print("================================================")         
-    print(disc_date_str)
     
     date_string = generate_date_range(fdate,tdate) # Generate the date range as a string
-    print(date_string)
+
     # Connect to the database and accuring the data
     conn = get_db_connection()
     cur = conn.cursor()
@@ -99,9 +98,6 @@ def plot():
     else:
         params = 'utstart,' + x_param + ',' + y_params
     
-    print("Discreet Date",bool(disc_date_str))
-    print("leng",len(disc_date_str))
-    print("Date Range", bool(date_string))
     
     
     if len(disc_date_str) == 2:
@@ -131,7 +127,7 @@ def plot():
         df = df.sort_values(by=['date', 'utstart'])
         df.reset_index(inplace=True, drop=True)
         df['datetime'] = df.apply(lambda row: datetime.combine(row['date'], row['utstart']), axis=1)
-    
+        df = df.loc[:,~df.columns.duplicated()].copy()
     # accessing x values from dataframe
     if x_param == 'utstart':
         #x_values = df['utstart'].apply(time_to_hours)
@@ -142,7 +138,6 @@ def plot():
     elif x_param == 'param2':
         x_values = df['param2'].values.tolist()
 
-    
     
     param_names_dict = a = {'utstart': 'UT-Time at start of the exposure', 
                             'ra': 'RA of field centre, J2000 (hour)', 
