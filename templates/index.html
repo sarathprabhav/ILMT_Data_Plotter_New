@@ -30,43 +30,44 @@
             
 
             <div class="checbox-master">
+
                 <h3>Y Parameters</h2>
 
             <div class="checkboxes">
                 
                 <div class="checkbox-group">
-                    <label><input type="checkbox" name="function" value="ra">RA</label>
-                    <label><input type="checkbox" name="function" value="dec">DEC</label>
-                    <label><input type="checkbox" name="function" value="ra1">RA-1</label>
-                    <label><input type="checkbox" name="function" value="dec1">DEC-1</label>
-                    <label><input type="checkbox" name="function" value="ra21">RA-2</label>
-                    <label><input type="checkbox" name="function" value="dec2">DEC-2</label>
-                    <label><input type="checkbox" name="function" value="dec_obs">DEC-obs</label>
-                    <label><input type="checkbox" name="function" value="ra_obs">RA-obs</label>
+                    <label title="RA of field centre, J2000(hour)"><input type="checkbox" name="function" value="ra">RA</label>
+                    <label title="DEC of field centre, J2000 (degree)" ><input type="checkbox" name="function" value="dec">DEC</label>
+                    <label title = "Dec of first pixel, J2000 (degree) " ><input type="checkbox" name="function" value="dec1">DEC-1</label>
+                    <label title = "RA of first pixel, J2000 (hour)" "><input type="checkbox" name="function" value="ra1">RA-1</label>
+                    <label title = "Dec of last pixel, J2000 (degree)" "><input type="checkbox" name="function" value="dec2">DEC-2</label>
+                    <label title = "RA of last pixel, J2000 (hour)" "><input type="checkbox" name="function" value="ra2">RA-2</label>
+                    <label title = "Dec of field center at epoch of observation (degree) " "><input type="checkbox" name="function" value="dec_obs">DEC-obs</label>
+                    <label title = "RA of field center at epoch of observation (hour)" "><input type="checkbox" name="function" value="ra_obs">RA-obs</label>
                     
                 </div>
                 
                 <div class="checkbox-group">
-                    <label><input type="checkbox" name="function" value="psf_a">PSF-A</label>
-                    <label><input type="checkbox" name="function" value="psf_b">PSF B</label>
-                    <label><input type="checkbox" name="function" value="psf_pa">PSF-PA</label>
-                    <label><input type="checkbox" name="function" value="zeropt">Zero Pt</label>
+                    <label title = "major axis of star images (arcsec)" ><input type="checkbox" name="function" value="psf_a">PSF-A</label>
+                    <label title = "minor axis of star images (arcsec)" ><input type="checkbox" name="function" value="psf_b">PSF B</label>
+                    <label title = "position angle of star images (deg)" ><input type="checkbox" name="function" value="psf_pa">PSF-PA</label>
+                    <label title = "Photometric magnitude zero point" ><input type="checkbox" name="function" value="zeropt">Zero Pt</label>
                 </div>
 
                 <div class="checkbox-group">
-                    <label><input type="checkbox" name="function" value="poserr">Pos-Err</label>
-                    <label><input type="checkbox" name="function" value="raerr"> RA-Err</label>
-                    <label><input type="checkbox" name="function" value="decerr"> DEC-Err</label>
-                    <label><input type="checkbox" name="function" value="zperr">ZP-err</label>
-                    <label><input type="checkbox" name="function" value="magerr">Mag-Err</label>
+                    <label title = "Estimated total error (arcsec)" ><input type="checkbox" name="function" value="poserr">Pos-Err</label>
+                    <label title = "Estimated RA error (arcsec)" ><input type="checkbox" name="function" value="raerr"> RA-Err</label>
+                    <label title = "Estimated dec error (arcsec)" ><input type="checkbox" name="function" value="decerr"> DEC-Err</label>
+                    <label title = "Estimated magnitude zero point error" ><input type="checkbox" name="function" value="zperr">ZP-err</label>
+                    <label title = "Estimated magnitude RMS error, bright stars" ><input type="checkbox" name="function" value="magerr">Mag-Err</label>
                 </div>
                 <div class="checkbox-group">
-                    <label><input type="checkbox" name="function" value="fwhm">FWHM</label>
-                    <label><input type="checkbox" name="function" value="sky">Sky</label>
-                    <label><input type="checkbox" name="function" value="param2">CCD Temperature</label>
-                    <label><input type="checkbox" name="function" value="param7">CCD Chamber Pressure</label>
-                    <label><input type="checkbox" name="function" value="param48">CryoTiger Pressure 1</label>
-                    <label><input type="checkbox" name="function" value="param49">CryoTiger Pressure 2</label>
+                    <label title = "FWHM of star images (arcsec)" ><input type="checkbox" name="function" value="fwhm">FWHM</label>
+                    <label title = "sky background before performing sky subtraction" ><input type="checkbox" name="function" value="sky">Sky</label>
+                    <label title = "CCD Temperature (C)" ><input type="checkbox" name="function" value="param2">CCD Temperature</label>
+                    <label title = "CCD Chamber Pressure (Torr)" ><input type="checkbox" name="function" value="param7">CCD Chamber Pressure</label>
+                    <label title = "CryoTiger Pressure 1 (psi)" ><input type="checkbox" name="function" value="param48">CryoTiger Pressure 1</label>
+                    <label title = "CryoTiger Pressure 2 (psi)" ><input type="checkbox" name="function" value="param49">CryoTiger Pressure 2</label>
                 </div>
                 
             </div>

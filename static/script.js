@@ -48,6 +48,7 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
         }
         // Define Layout
         const layout = {
+            showlegend: true,
             title: "ILMT",
             xaxis: {
                 automargin: true,
@@ -57,6 +58,7 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
                     standoff: 20
                 }
             }
+            
         };
         
         Plotly.newPlot('plot', traces, layout);

@@ -124,64 +124,87 @@ def plot():
 
     
     
-    param_names_dict = {'utstart':"UT-Start",'param2':"CCD-Temperature" }
+    param_names_dict = a = {'utstart': 'UT-Time at start of the exposure', 
+                            'ra': 'RA of field centre, J2000 (hour)', 
+                            'dec': 'DEC of field centre, J2000 (degree)', 
+                            'ra1': 'RA of first pixel, J2000 (hour)', 
+                            'dec1': 'Dec of first pixel, J2000 (degree)', 
+                            'ra2': 'RA of last pixel, J2000 (hour)', 
+                            'dec2': 'Dec of last pixel, J2000 (degree)', 
+                            'dec_obs': 'Dec of field center at epoch of observation (degree)', 
+                            'ra_obs': 'RA of field center at epoch of observation (hour)', 
+                            'psf_a': 'major axis of star images (arcsec)', 
+                            'psf_b': 'minor axis of star images (arcsec)', 
+                            'psf_pa': 'position angle of star images (deg)', 
+                            'zeropt': 'Photometric magnitude zero point', 
+                            'poserr': 'Estimated total error (arcsec)', 
+                            'raerr': 'Estimated RA error (arcsec)', 
+                            'decerr': 'Estimated dec error (arcsec)', 
+                            'zperr': 'Estimated magnitude zero point error', 
+                            'magerr': 'Estimated magnitude RMS error, bright stars', 
+                            'fwhm': 'FWHM of star images (arcsec)', 
+                            'sky': 'sky background before performing sky subtraction', 
+                            'param2': 'CCD Temperature (C)', 
+                            'param7': 'CCD Chamber Pressure (Torr)', 
+                            'param48': 'CryoTiger Pressure 1 (psi)', 
+                            'param49': 'CryoTiger Pressure 2 (psi)'}
     y_values ={}
     
     y_list = ["utstart,ra,dec,ra1,dec1,ra2,dec2,dec_obs,ra_obs,psf_a,psf_b,psf_pa,zeropt,poserr,raerr,decerr,zperr,magerr,fwhm,sky,param2,param7,param48,param49"]
     
     #==============================GROUP 1============================
     if 'ra'in functions:
-        y_values['ra'] = df["ra"].apply(time_to_hours).tolist()
+        y_values[param_names_dict['ra']] = df["ra"].apply(time_to_hours).tolist()
     if 'dec'in functions:
-        y_values['dec'] = df['dec'].apply(dec_to_degree).tolist()
+        y_values[param_names_dict['dec']] = df['dec'].apply(dec_to_degree).tolist()
     if 'ra1' in functions:
-        y_values['ra1'] = df['ra1'].apply(time_to_hours).tolist()
+        y_values[param_names_dict['ra1']] = df['ra1'].apply(time_to_hours).tolist()
     if 'dec1' in functions:
-        y_values['dec1'] = df['dec1'].apply(dec_to_degree).tolist()
+        y_values[param_names_dict['dec1']] = df['dec1'].apply(dec_to_degree).tolist()
     if 'ra2' in functions:
-        y_values['ra2'] = df['ra2'].apply(time_to_hours).tolist()
+        y_values[param_names_dict['ra2']] = df['ra2'].apply(time_to_hours).tolist()
     if 'dec2' in functions:
-        y_values['dec2'] = df['dec2'].apply(dec_to_degree).tolist()
+        y_values[param_names_dict['dec2']] = df['dec2'].apply(dec_to_degree).tolist()
     if 'dec_obs' in functions:
-        y_values['dec_obs'] = df['dec_obs'].apply(dec_to_degree).tolist()
+        y_values[param_names_dict['dec_obs']] = df['dec_obs'].apply(dec_to_degree).tolist()
     if 'ra_obs' in functions:
-        y_values['ra_obs'] = df['ra_obs'].apply(time_to_hours).tolist()
+        y_values[param_names_dict['ra_obs']] = df['ra_obs'].apply(time_to_hours).tolist()
     
     #==============================Group 2 ============================
     if 'psf_a' in functions:
-        y_values['psf_a'] = df['psf_a'].tolist()
+        y_values[param_names_dict['psf_a']] = df['psf_a'].tolist()
     if 'psf_b' in functions:
-        y_values['psf_b'] = df['psf_b'].tolist()
+        y_values[param_names_dict['psf_b']] = df['psf_b'].tolist()
     if 'psf_pa' in functions:
-        y_values['psf_pa'] = df['psf_pa'].tolist()
+        y_values[param_names_dict['psf_pa']] = df['psf_pa'].tolist()
     if 'zeropt' in functions:
-        y_values['zeropt'] = df['zeropt'].tolist()
+        y_values[param_names_dict['zeropt']] = df['zeropt'].tolist()
         
     #=============================Group 3 =============================
     if 'poserr' in functions:
-        y_values['poserr'] = df['poserr'].tolist()
+        y_values[param_names_dict['poserr']] = df['poserr'].tolist()
     if 'raerr' in functions:
-        y_values['raerr'] = df['raerr'].tolist()
+        y_values[ param_names_dict['raerr']] = df['raerr'].tolist()
     if 'decerr' in functions:
-        y_values['decerr'] = df['decerr'].tolist
+        y_values[param_names_dict['decerr']] = df['decerr'].tolist()
     if 'zperr' in functions:
-        y_values['zperr'] = df['zperr'].tolist()
+        y_values[ param_names_dict['zperr']] = df['zperr'].tolist()
     if 'magerr' in functions:
-        y_values['magerr'] = df['magerr'].tolist()
+        y_values[param_names_dict['magerr']] = df['magerr'].tolist()
     
     #============================Group 4 =============================
     if 'fwhm' in functions:
-        y_values['fwhm'] = df['fwhm'].tolist()
+        y_values[param_names_dict['fwhm']] = df['fwhm'].tolist()
     if'sky' in functions:
-        y_values['sky'] = df['sky'].tolist()
+        y_values[param_names_dict['sky']] = df['sky'].tolist()
     if 'param2' in functions:
-        y_values['param2'] = df['param2'].tolist()
+        y_values[param_names_dict['param2']] = df['param2'].tolist()
     if 'param7' in functions:
-        y_values['param7'] = df['param7'].tolist()
+        y_values[param_names_dict['param7']] = df['param7'].tolist()
     if 'param48' in functions:
-        y_values['param48'] = df['param48'].tolist()
+        y_values[param_names_dict['param48']] = df['param48'].tolist()
     if 'param49' in functions:
-        y_values['param49'] = df['param49'].tolist()
+        y_values[param_names_dict['param49']] = df['param49'].tolist()
     
      
     print(x_values)
