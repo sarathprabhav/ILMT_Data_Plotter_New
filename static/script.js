@@ -24,6 +24,7 @@ function deselectAll() {
 }
 
 function isEmpty(p1) {
+    
     if (p1.length > 0) {
         return false;
     }
@@ -36,6 +37,7 @@ function isEmpty(p1) {
 document.getElementById('plot-form').addEventListener('submit', function(event) {
     event.preventDefault();
     
+    // Getting form data from from html form
     const selectedFunctions = Array.from(document.querySelectorAll('input[name="function"]:checked'))
                                    .map(input => input.value);
     const xRange = document.getElementById('x-axis').value;
@@ -43,23 +45,16 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
     const fdate = document.getElementById('fdate').value; // For date inputs
     const tdate = document.getElementById('todate').value;
     const ddate = document.getElementById('ddates').value;
-    console.log("================================================ ")
-    console.log(" length of fdate: " + fdate.length)
-    console.log(" length of tdate: " + tdate.length)
-    console.log(" length of ddate: " + ddate.length)
-    console.log(((isEmpty(fdate) && isEmpty(tdate) ) || (isEmpty(ddate)) ).valueOf())
 
-
-    if ( (isEmpty(ddate)) ) {
-        
+    // Validate form data and update alert messages
+    if ( (isEmpty(ddate)) ) {  // Alert for date inputs
         if (isEmpty(fdate) || isEmpty(tdate)) {
             alert('Please select either a date range or a discreet date.');
             return;
         }
-
     }
 
-    if (isEmpty(selectedFunctions)) {
+    if (isEmpty(selectedFunctions)) { // Alert for parameters
         alert('Please select at least one parameter.');
         return;
     }
@@ -83,22 +78,10 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
     })
     .then(response => response.json())
     .then(data => {
-        const traces = [];
-        //console.log("================================")
-        //console.log(data);
-        //console.log("================================")
-        //console.log(data.y);
-        //console.log("================================")
-        //console.log(data.x);
-        //console.log("================================")
-        //console.log(data.xlabel);
-        console.log("-------------------------------- ")
-        console.log(data);
-
-
         
-
-        for (const [func, yValues] of Object.entries(data.y)) {
+        // Getting values from the backend and creating traces for Plotly
+        const traces = [];
+        for (const [func, yValues] of Object.entries(data.y)) { //Defining Traces for Plotly
             traces.push({
                 x: data.x,
                 y: yValues,
@@ -109,6 +92,7 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
             });
         console.log(traces);
         }
+
         // Define Layout
         const layout = {
             margin: {
