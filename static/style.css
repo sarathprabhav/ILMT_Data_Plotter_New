@@ -53,14 +53,17 @@ body {
     margin-bottom: 20px;
     border: 1px solid #c0c0c0;
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-    width: 800px;
+    width: 80%;
 }
 .checkbox-group {
     
     padding: 1px;
-    width: 100px;
+    width: 100px auto;
     margin: 20px auto;
     
+}
+.None{
+    display: none;
 }
 
 .checkbox-group label {
@@ -79,6 +82,11 @@ body {
 #plot-Button {
     font-size: 20px;
     width: 100px;
+    
+}
+#plot-Button {
+   margin-left: 75%;
+
 }
 
 .checkbox-group .form-check-input{

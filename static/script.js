@@ -111,6 +111,15 @@ document.getElementById('plot-form').addEventListener('submit', function(event) 
         }
         // Define Layout
         const layout = {
+            margin: {
+                l: 80,
+                r: 50,
+                b: 50,
+                t: 50,
+                pad: 4
+            },
+            plot_bgcolor:"#fbfbfb",
+            paper_bgcolor:"#fbfbfb",
             showlegend: true,
             //title: "ILMT",
             xaxis: {
