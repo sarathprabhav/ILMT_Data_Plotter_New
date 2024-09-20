@@ -1,6 +1,5 @@
 # ILMT Fits Headrer : Web APP
-Prepared by : Sarath Prabhavu J 
-
+Prepared by : Sarath Prabhavu J <br>
 mail : sarathprabhav@gmail.com
 
 The whole project can be divided into two parts 
@@ -11,7 +10,7 @@ The whole project can be divided into two parts
 
 Files Mentioned are available in the database folder. 
 
-Database has developed using PostgreSQL. The database consists of all the necessary parameters needed to be displayed in the web app. The Data base has been created using the db_create.py code.  The unique ID of the database   is created using the date of observation and time of observation. For ex fits file corresponding to 2023 April 09 and time 22:17:22 is assigned with the uid 20230409221722. The following are the header fields
+Database has developed using PostgreSQL. The database consists of all the necessary parameters needed to be displayed in the web app. The Data base has been created using the **create_db.py** code.  The unique ID of the database   is created using the date of observation and time of observation. For example fits file corresponding to 2023 April 09 and time 22:17:22 is assigned with the *uid 20230409221722*. The following are the header fields
 - Date of observation
 - Right Ascencion 
 - Declination
@@ -36,8 +35,33 @@ Database has developed using PostgreSQL. The database consists of all the necess
 - param 48
 - param 49 
 
-All these parameters are read from the fits files using Astropy and Upadated it to the database using the db_update.py
+Database Credentials 
 
+<blockquote>
+hostname = "localhost"<br>
+database = "ilmt_database"<br>
+username = 'ilmt_user'<br>
+pwd = "devasthal"<br>
+port_id = 5432<br>
+</blockquote>
+<br>
+After creating the database, the database has to be updated with the curresponding values from the fits file. 
+
+```
+directory = '/home/ilmt/HARDDISK2/Sarath/Database/Data'
+```
+All these parameters are read from the fits files in the directory using Astropy and Upadated it to the database using the **update_db.py**. You can change the directory by changing the above line of code to desired location
+
+
+### Copying data from IC1
+
+ **rangedate_data_copy_new.sh** bash script can be used to copy data from IC1 to ICC2. In the bash script initial and final date can be selected and data will be copied and extracted to the desired directory. 
+
+'''
+initial_date = "20240101"<br>
+final_date = "20240331"
+'''
+This extracted fits files can be added to database using update.py.
 
 ### Web App Development
 Web app devolopment can be devided into three parts 
